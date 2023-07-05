@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { UserService } from 'src/app/services/user.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 
 
@@ -33,7 +34,7 @@ export class CrearAdComponent implements OnInit {
   selectescuela: Escuela | undefined
   roles: Rol[] | undefined
   selectRol: Rol | undefined
-  constructor(private toastr: ToastrService,private uServices:UserService) {
+  constructor(private toastr: ToastrService,private uServices:UserService, private router: Router) {
 
   }
 
@@ -73,6 +74,7 @@ export class CrearAdComponent implements OnInit {
       this.uServices.singIn(usuario).subscribe(data=>{
         this.cargando=false
         this.toastr.success('El usuario se registro exitosamente !', 'Bien!!!');
+        this.router.navigate(['/home'])
       }, (event: HttpErrorResponse) =>{
         this.cargando=false
         if(event.error.msg){
