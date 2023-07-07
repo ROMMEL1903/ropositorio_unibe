@@ -1,7 +1,7 @@
 
 <div class="wrapper">
 	
-	<div class="body">
+	<div class="body" *ngIf="!cargando"  >
 		<img class="logo"
 			src="../../../assets/img/Logo-de-la-Universidad-Iberoamericana-del-Ecuador-UNIBE-300x300 (1).png"
 			alt="img login">
@@ -16,5 +16,7 @@
 		</div>
 		<p-button  styleClass="p-button-rounded " (onClick)="iniciar()" label="Ingresar"> </p-button>
 	</div>
+	<app-spiner *ngIf="cargando" ></app-spiner>
 
 </div>
+

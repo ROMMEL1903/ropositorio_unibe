@@ -1,1 +1,35 @@
-<p>lista-ad works!</p>
+<app-menu></app-menu>
+<div>
+    <p-table  *ngIf="!cargando" [value]="usuarios" [tableStyle]="{'min-width': '40rem'}">
+    
+        <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nombres</th>
+                <th>Cedula</th>
+                <th>Escuela</th>
+                <th>Rol</th>
+                <th>Correo</th>
+                <th>Eliminar</th>
+                <th>Editar</th>
+    
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-listU>
+            <tr>
+                <td>{{listU.nombres}}</td>
+                <td>{{listU.cedula}}</td>
+                <td>{{listU.escuela}}</td>
+                <td>{{listU.rol}}</td>
+                <td>{{listU.correo}}</td>
+                <td><p-button (onClick)="eliminar(listU.cedula)" icon="pi pi-trash" styleClass="p-button-rounded p-button-danger "></p-button></td>
+                <td><p-button routerLink="/editar/{{listU.cedula}}" icon="pi pi-pencil" styleClass="p-button-rounded p-button-secondary"></p-button></td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <app-spiner *ngIf="cargando" ></app-spiner>
+
+</div>

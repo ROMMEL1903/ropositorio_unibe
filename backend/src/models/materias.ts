@@ -7,6 +7,9 @@ export const Materia = sequelize.define('materia', {
         primaryKey: true,
         autoIncrement: true
     },
+    abreviatura:{
+type:DataTypes.STRING,
+    },
     nombre: {
         type: DataTypes.STRING
     },

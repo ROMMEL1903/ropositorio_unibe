@@ -33,6 +33,8 @@ class Server {
     routes() {
         this.app.use('/materias', routesMateria)
         this.app.use('/usuarios', routesUser)
+
+        
     }
 
     midlewares(){

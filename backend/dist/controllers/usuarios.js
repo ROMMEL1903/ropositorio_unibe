@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginUser = exports.newUser = void 0;
+exports.updateUser = exports.deletUser = exports.getUsuario = exports.getUsuarios = exports.loginUser = exports.newUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const usuario_1 = require("../models/usuario");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -63,8 +63,68 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
     }
     const token = jsonwebtoken_1.default.sign({
-        correo: correo
+        correo: correo,
+        rol: user.rol
     }, process.env.CLAVE_SECRETA || 'GmRawg14');
     res.json(token);
 });
 exports.loginUser = loginUser;
+const getUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const usuarios = yield usuario_1.Usuario.findAll();
+    res.json(usuarios);
+});
+exports.getUsuarios = getUsuarios;
+const getUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { cedula } = req.params;
+    const usuario = yield usuario_1.Usuario.findByPk(cedula);
+    if (usuario) {
+        res.json(usuario);
+    }
+    else {
+        res.status(404).json({
+            msg: 'No exixte un usuario con el numero de cedula' + cedula
+        });
+    }
+});
+exports.getUsuario = getUsuario;
+const deletUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { cedula } = req.params;
+    const usuario = yield usuario_1.Usuario.findByPk(cedula);
+    if (usuario) {
+        yield usuario.destroy();
+        res.status(404).json({
+            msg: 'El usuario fue eliminado con exito'
+        });
+    }
+    else {
+        res.status(404).json({
+            msg: 'No exixte un usuario con el numero de cedula' + cedula
+        });
+    }
+});
+exports.deletUser = deletUser;
+const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { body } = req;
+    const { cedula } = req.params;
+    try {
+        const usuario = yield usuario_1.Usuario.findByPk(cedula);
+        if (usuario) {
+            yield usuario.update(body);
+            res.json({
+                msg: 'El usuario a sido actualizado'
+            });
+        }
+        else {
+            res.json({
+                msg: 'El usuario ' + cedula + ' no existe'
+            });
+        }
+    }
+    catch (error) {
+        console.log(error);
+        res.json({
+            msg: 'Upps Ocurrio un error comunique con soporte'
+        });
+    }
+});
+exports.updateUser = updateUser;

@@ -26,11 +26,14 @@ export class MenuComponent implements OnInit {
         items: [
           {
             label: 'Crear',
-            icon: 'pi pi-fw pi-plus'
+            icon: 'pi pi-fw pi-plus',
+            routerLink:'/nuevaMateria'
           },
           {
             label: 'Ver',
-            icon: 'pi pi-fw pi-folder-open'
+            icon: 'pi pi-fw pi-folder-open',
+            routerLink:'/ListaMaterias'
+        
           }
         ]
       },
@@ -45,7 +48,8 @@ export class MenuComponent implements OnInit {
           },
           {
             label: 'Listado',
-            icon: 'pi pi-fw pi-users'
+            icon: 'pi pi-fw pi-users',
+            routerLink:'/listaUsers'
           }
         ]
       },
@@ -78,12 +82,14 @@ export class MenuComponent implements OnInit {
             ]
           }
         ]
-      },
-      {
-        label: 'Quit',
-        icon: 'pi pi-fw pi-power-off'
       }
     ];
+  }
+
+  salir(){
+    localStorage.removeItem('TOKEN')
+    localStorage.removeItem('ROL')
+    this.reuter.navigate(['/login'])
   }
 
 }

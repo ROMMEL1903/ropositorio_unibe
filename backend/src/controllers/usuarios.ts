@@ -38,23 +38,90 @@ export const newUser = async (req: Request, res: Response) => {
 export const loginUser = async (req: Request, res: Response) => {
 
     const { correo, clave } = req.body;
-    const user:any = await Usuario.findOne({ where: { correo: correo } })
+    const user: any = await Usuario.findOne({ where: { correo: correo } })
     if (!user) {
         return res.status(400).json({
             msg: 'El usuario ' + correo + ' no existe'
         })
     }
-   const claveCorrecta= await  bcrypt.compare(clave, user.clave)
-   console.log(claveCorrecta)
-   if(!claveCorrecta){
-    return res.status(400).json({
-        msg: 'Clave incorrecta'
-    })
-   }
+    const claveCorrecta = await bcrypt.compare(clave, user.clave)
+    console.log(claveCorrecta)
+    if (!claveCorrecta) {
+        return res.status(400).json({
+            msg: 'Clave incorrecta'
+        })
+    }
 
-   const token= jwt.sign({
-    correo: correo
-   },process.env.CLAVE_SECRETA || 'GmRawg14');
+    const token = jwt.sign({
+        correo: correo,
+        rol: user.rol
 
-   res.json(token)
+    }, process.env.CLAVE_SECRETA || 'GmRawg14');
+
+    res.json(token)
+}
+
+
+export const getUsuarios = async (req: Request, res: Response) => {
+    const usuarios = await Usuario.findAll();
+    res.json(usuarios)
+
+}
+
+export const getUsuario = async (req: Request, res: Response) => {
+    const { cedula } = req.params
+    const usuario = await Usuario.findByPk(cedula)
+
+    if (usuario) {
+        res.json(usuario)
+    } else {
+        res.status(404).json({
+            msg: 'No exixte un usuario con el numero de cedula' + cedula
+        })
+    }
+}
+
+
+export const deletUser = async (req: Request, res: Response) => {
+    const { cedula } = req.params
+    const usuario = await Usuario.findByPk(cedula)
+
+    if (usuario) {
+        await usuario.destroy()
+        res.status(404).json({
+            msg: 'El usuario fue eliminado con exito'
+        })
+
+    } else {
+        res.status(404).json({
+            msg: 'No exixte un usuario con el numero de cedula' + cedula
+        })
+
+    }
+}
+
+
+export const updateUser = async (req: Request, res: Response) => {
+    const { body } = req
+    const { cedula } = req.params
+
+    try {
+        const usuario = await Usuario.findByPk(cedula)
+
+        if (usuario) {
+            await usuario.update(body)
+            res.json({
+                msg: 'El usuario a sido actualizado'
+            })
+        } else {
+            res.json({
+                msg: 'El usuario ' + cedula + ' no existe'
+            })
+        }
+    } catch (error) {
+        console.log(error)
+        res.json({
+            msg: 'Upps Ocurrio un error comunique con soporte'
+        })
+    }
 }

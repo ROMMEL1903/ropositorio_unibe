@@ -12,6 +12,9 @@ exports.Materia = connection_1.default.define('materia', {
         primaryKey: true,
         autoIncrement: true
     },
+    abreviatura: {
+        type: sequelize_1.DataTypes.STRING,
+    },
     nombre: {
         type: sequelize_1.DataTypes.STRING
     },
