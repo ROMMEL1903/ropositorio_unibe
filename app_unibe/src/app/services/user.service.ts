@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../interfaces/usuario';
@@ -8,6 +8,10 @@ import { Observable } from 'rxjs';
 interface credenciales {
   correo: string,
   clave: string
+}
+interface filtro {
+  rol: string,
+  escuela: string
 }
 @Injectable({
   providedIn: 'root'
@@ -41,21 +45,27 @@ export class UserService {
 
 
   elimirarU(cedula: string): Observable<void> {
-    return this.http.delete<void>(this.myAppUrl+this.myApi+cedula)
+    return this.http.delete<void>(this.myAppUrl + this.myApi + cedula)
   }
 
 
 
-  getUser(cedula:string):Observable<Usuario>{
-    return this.http.get<Usuario>(this.myAppUrl+this.myApi+cedula)
+  getUser(cedula: string): Observable<Usuario> {
+    return this.http.get<Usuario>(this.myAppUrl + this.myApi + cedula)
 
   }
 
-  actualizarU(cedula:string,usuario:Usuario): Observable<void>{
+  actualizarU(cedula: string, usuario: Usuario): Observable<void> {
 
-    return this.http.put<void>(this.myAppUrl+this.myApi+cedula, usuario)
+    return this.http.put<void>(this.myAppUrl + this.myApi + cedula, usuario)
+  }
 
-    
+ 
+  getUsuariosByRolAndEscuela(rol: string, escuela: string): Observable<Usuario[]> {
+    const params = new HttpParams()
+      .set('rol', rol)
+      .set('escuela', escuela);
 
+    return this.http.get<Usuario[]>(`${this.myAppUrl}${this.myApi}get/Estudiantes`, { params });
   }
 }

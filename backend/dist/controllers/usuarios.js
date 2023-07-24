@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUser = exports.deletUser = exports.getUsuario = exports.getUsuarios = exports.loginUser = exports.newUser = void 0;
+exports.getUsuariosbyRolandEscuela = exports.updateUser = exports.deletUser = exports.getUsuario = exports.getUsuarios = exports.loginUser = exports.newUser = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const usuario_1 = require("../models/usuario");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -64,7 +64,9 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
     const token = jsonwebtoken_1.default.sign({
         correo: correo,
-        rol: user.rol
+        rol: user.rol,
+        escuela: user.escuela,
+        cedula: user.cedula
     }, process.env.CLAVE_SECRETA || 'GmRawg14');
     res.json(token);
 });
@@ -82,7 +84,7 @@ const getUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
     else {
         res.status(404).json({
-            msg: 'No exixte un usuario con el numero de cedula' + cedula
+            msg: 'No existe un usuario con el numero de cedula:' + cedula
         });
     }
 });
@@ -98,7 +100,7 @@ const deletUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
     else {
         res.status(404).json({
-            msg: 'No exixte un usuario con el numero de cedula' + cedula
+            msg: 'No existe un usuario con el numero de cedula' + cedula
         });
     }
 });
@@ -128,3 +130,12 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.updateUser = updateUser;
+const getUsuariosbyRolandEscuela = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { rol, escuela } = req.query;
+    const user = yield usuario_1.Usuario.findAll({ where: {
+            rol: rol,
+            escuela: escuela
+        } });
+    res.json(user);
+});
+exports.getUsuariosbyRolandEscuela = getUsuariosbyRolandEscuela;

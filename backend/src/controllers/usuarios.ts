@@ -54,7 +54,9 @@ export const loginUser = async (req: Request, res: Response) => {
 
     const token = jwt.sign({
         correo: correo,
-        rol: user.rol
+        rol: user.rol,
+        escuela:user.escuela,
+        cedula:user.cedula
 
     }, process.env.CLAVE_SECRETA || 'GmRawg14');
 
@@ -76,7 +78,7 @@ export const getUsuario = async (req: Request, res: Response) => {
         res.json(usuario)
     } else {
         res.status(404).json({
-            msg: 'No exixte un usuario con el numero de cedula' + cedula
+            msg: 'No existe un usuario con el numero de cedula:' + cedula
         })
     }
 }
@@ -94,7 +96,7 @@ export const deletUser = async (req: Request, res: Response) => {
 
     } else {
         res.status(404).json({
-            msg: 'No exixte un usuario con el numero de cedula' + cedula
+            msg: 'No existe un usuario con el numero de cedula' + cedula
         })
 
     }
@@ -124,4 +126,14 @@ export const updateUser = async (req: Request, res: Response) => {
             msg: 'Upps Ocurrio un error comunique con soporte'
         })
     }
+}
+
+export const getUsuariosbyRolandEscuela = async (req: Request, res: Response) => {
+   const{rol,escuela}=req.query
+   const user:any= await Usuario.findAll({where:{
+    rol:rol,
+    escuela:escuela
+   }})
+   res.json(user)
+
 }

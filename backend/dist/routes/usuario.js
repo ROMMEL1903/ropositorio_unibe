@@ -13,4 +13,5 @@ router.get('/lista', validate_token_1.default, usuarios_1.getUsuarios);
 router.get('/:cedula', validate_token_1.default, usuarios_1.getUsuario);
 router.delete('/:cedula', validate_token_1.default, usuarios_1.deletUser);
 router.put('/:cedula', validate_token_1.default, usuarios_1.updateUser);
+router.get('/get/Estudiantes', validate_token_1.default, usuarios_1.getUsuariosbyRolandEscuela);
 exports.default = router;

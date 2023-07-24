@@ -7,13 +7,33 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  items: MenuItem[] | undefined;
+  superU=false
+  director=false
+  finaciero=false
+  estudiante=false
+
+  itemsSuperU: MenuItem[] | undefined;
+  itemsDirector:MenuItem[]| undefined
+  itemsEstudiante:MenuItem[]|undefined
 
 
   constructor(private reuter: Router){
+    if(localStorage.getItem('ROL')==='Super Usuario'){
+      this.superU=true
+    }
+
+    if(localStorage.getItem('ROL')==='Director'){
+      this.director=true
+    }
+
+    if(localStorage.getItem('ROL')==='Estudiante'){
+      this.estudiante=true
+    }
+
   }
+  
   ngOnInit() {
-    this.items = [
+    this.itemsSuperU = [
       {
         label: 'Home',
         icon: 'pi pi-fw pi-home',
@@ -84,11 +104,79 @@ export class MenuComponent implements OnInit {
         ]
       }
     ];
+
+
+    this.itemsDirector=[
+      {
+        label: 'Home',
+        icon: 'pi pi-fw pi-home',
+        routerLink:'/home'
+
+      },
+      {
+        label: 'Estudiantes',
+        icon: 'pi pi-fw pi-id-card',
+        items: [
+          {
+            label: 'Crear',
+            icon: 'pi pi-fw pi-user-plus',
+            routerLink:'/CrearEstudiante'
+          },
+          {
+            label: 'Ver',
+            icon: 'pi pi-fw pi-users',
+            routerLink:'/listaEstudiante'
+        
+          }
+        ]
+      },
+      {
+        label: 'Matriculas',
+        icon: 'pi pi-fw pi-folder',
+        routerLink:'/listaMatriculas'
+      },
+      {
+        label: 'Cargas Academicas',
+        icon: 'pi pi-fw pi-table',
+        routerLink:'/listaCargas'
+       }
+    ]
+
+    this.itemsEstudiante=[
+      {
+        label: 'Home',
+        icon: 'pi pi-fw pi-home',
+        routerLink:'/home'
+
+      },
+      {
+        label: 'Pagos',
+        icon: 'pi pi-fw pi-dollar',
+        items: [
+          {
+            label: 'Historial',
+            icon: 'pi pi-fw pi-history',
+            routerLink:'/CrearEstudiante'
+          },
+          {
+            label: 'Pendientes',
+            icon: 'pi pi-fw pi-clock',
+            routerLink:'/listaEstudiante'
+        
+          }
+        ]
+        
+
+      },
+    ]
+
+  
   }
 
   salir(){
     localStorage.removeItem('TOKEN')
     localStorage.removeItem('ROL')
+    localStorage.removeItem('ESCUELA')
     this.reuter.navigate(['/login'])
   }
 

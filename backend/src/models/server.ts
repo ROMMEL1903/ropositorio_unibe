@@ -1,12 +1,22 @@
 
 import express from 'express';
 import cors from 'cors'
+
+import routesPagos from '../routes/pagos'
 import routesMateria from '../routes/materias'
-import { getMaterias } from '../controllers/materias';
 import routesUser from '../routes/usuario'
-import sequelize from '../db/connection';
+import routerCarga from '../routes/cargasAcademicas'
+import routesMateriaCarga from '../routes/materiaCarga'
+import routesMatriculas from '../routes/matriculas'
+import routesFactura from '../routes/factura'
 import {  Materia } from './materias';
 import { Usuario } from './usuario';
+import { Carga_Academica } from './carga_academica';
+import { Materia_Carga } from './materaintoCarga';
+import { Matricula } from './matricula';
+import { Factura } from './factura';
+import { Pago } from './pago';
+
 
 
 
@@ -30,9 +40,15 @@ class Server {
         })
     }
 
+    
     routes() {
         this.app.use('/materias', routesMateria)
         this.app.use('/usuarios', routesUser)
+        this.app.use('/materiasCarga', routesMateriaCarga)
+        this.app.use('/cargasAcademicas', routerCarga)
+        this.app.use('/matriculas',routesMatriculas)
+        this.app.use('/facturas',routesFactura)
+        this.app.use('/pagos',routesPagos)
 
         
     }
@@ -50,11 +66,17 @@ class Server {
         try{
             await Materia.sync()
             await Usuario.sync()
+            await Carga_Academica.sync()
+            await Materia_Carga.sync()
+            await Matricula.sync()
+            await Factura.sync()
+            await Pago.sync()
            
         }catch(error){
             console.log('Errooo >:( ', error)
         }
     }
+    
 
 }
 

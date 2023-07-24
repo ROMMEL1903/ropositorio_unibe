@@ -40,9 +40,15 @@ cargando=false
           console.log(data)
 
           localStorage.setItem('TOKEN', data)
-          const decodedToken = jwt_decode(data) as { rol: string };;
+          const decodedToken = jwt_decode(data) as { rol: string };
+          const decodedTokenE = jwt_decode(data) as { escuela: string };
+          const decodedTokenCi = jwt_decode(data) as { cedula: string };
+          const ci= decodedTokenCi.cedula
           const rol = decodedToken.rol;
+          const escuela=decodedTokenE.escuela
           localStorage.setItem('ROL',rol)
+          localStorage.setItem('CI',ci)
+          localStorage.setItem('ESCUELA',escuela)
           this.router.navigate(['/home'])
           
         }, error: (e: HttpErrorResponse) => {

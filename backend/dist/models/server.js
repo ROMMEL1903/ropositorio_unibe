@@ -14,10 +14,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
+const pagos_1 = __importDefault(require("../routes/pagos"));
 const materias_1 = __importDefault(require("../routes/materias"));
 const usuario_1 = __importDefault(require("../routes/usuario"));
+const cargasAcademicas_1 = __importDefault(require("../routes/cargasAcademicas"));
+const materiaCarga_1 = __importDefault(require("../routes/materiaCarga"));
+const matriculas_1 = __importDefault(require("../routes/matriculas"));
+const factura_1 = __importDefault(require("../routes/factura"));
 const materias_2 = require("./materias");
 const usuario_2 = require("./usuario");
+const carga_academica_1 = require("./carga_academica");
+const materaintoCarga_1 = require("./materaintoCarga");
+const matricula_1 = require("./matricula");
+const factura_2 = require("./factura");
+const pago_1 = require("./pago");
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -35,6 +45,11 @@ class Server {
     routes() {
         this.app.use('/materias', materias_1.default);
         this.app.use('/usuarios', usuario_1.default);
+        this.app.use('/materiasCarga', materiaCarga_1.default);
+        this.app.use('/cargasAcademicas', cargasAcademicas_1.default);
+        this.app.use('/matriculas', matriculas_1.default);
+        this.app.use('/facturas', factura_1.default);
+        this.app.use('/pagos', pagos_1.default);
     }
     midlewares() {
         this.app.use(express_1.default.json());
@@ -45,6 +60,11 @@ class Server {
             try {
                 yield materias_2.Materia.sync();
                 yield usuario_2.Usuario.sync();
+                yield carga_academica_1.Carga_Academica.sync();
+                yield materaintoCarga_1.Materia_Carga.sync();
+                yield matricula_1.Matricula.sync();
+                yield factura_2.Factura.sync();
+                yield pago_1.Pago.sync();
             }
             catch (error) {
                 console.log('Errooo >:( ', error);

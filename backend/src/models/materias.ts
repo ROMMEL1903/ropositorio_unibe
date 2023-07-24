@@ -7,8 +7,8 @@ export const Materia = sequelize.define('materia', {
         primaryKey: true,
         autoIncrement: true
     },
-    abreviatura:{
-type:DataTypes.STRING,
+    abreviatura: {
+        type: DataTypes.STRING,
     },
     nombre: {
         type: DataTypes.STRING
@@ -16,10 +16,10 @@ type:DataTypes.STRING,
     creditos: {
         type: DataTypes.INTEGER
     },
-    valorCredito:{
+    valorCredito: {
         type: DataTypes.FLOAT
     }
-},{
-    tableName:'Materias',
-    timestamps:false
+}, {
+    tableName: 'Materias',
+    timestamps: false
 })

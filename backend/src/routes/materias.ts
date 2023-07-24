@@ -11,5 +11,5 @@ router.delete('/:id', validateToken,deletMateria)
 router.get('/:id', validateToken,getMateria)
 router.put('/:id', validateToken, updateMateria)
 
-
+ 
 export default router;

@@ -57,6 +57,7 @@ export const deletMateria= async (req:Request, res:Response)=>{
 }
 
 
+
 export const getMateria = async (req: Request, res: Response)=>{
     const {id}=req.params
     const materia= await Materia.findByPk(id)

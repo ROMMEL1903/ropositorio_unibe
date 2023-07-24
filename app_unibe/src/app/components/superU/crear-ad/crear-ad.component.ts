@@ -25,7 +25,7 @@ export class CrearAdComponent implements OnInit {
   titulo:string='Crear Usuario'
   tituloB:string='Guardar'
   cargando= false
-  value = ''
+
   cedula = ''
   nombres = ''
   correo = ''
@@ -52,7 +52,7 @@ export class CrearAdComponent implements OnInit {
 
     }
     this.roles = [
-      { name: ' Super Usuario' },
+      { name: 'Super Usuario' },
       { name: 'Director', },
       { name: 'Financiero', }
     ];
@@ -62,6 +62,7 @@ export class CrearAdComponent implements OnInit {
       { name: 'Derecho' },
       { name: 'Fisioterapia' },
       { name: 'Economia' },
+      { name: 'Admin' },
     ];
 
   }

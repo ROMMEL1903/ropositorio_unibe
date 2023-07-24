@@ -1,0 +1,39 @@
+<body>
+  <app-menu></app-menu>
+  <div class="wrapper">
+    <div class="body">
+      <h3>Realizar pago</h3>
+      <div class="info">
+        <label>Pago de:</label>
+        <span>{{razon}}</span>
+      </div>
+      <div class="info">
+        <label>Id Factura:</label>
+        <span>{{idFactura}}</span>
+      </div>
+      <div class="info">
+        <label>Nombres:</label>
+        <span>{{nombres}}</span>
+      </div>
+      <div class="info">
+        <label>Cedula:</label>
+        <span>{{cedula}}</span>
+      </div>
+      <div class="info">
+        <label>Descuento:</label>
+        <span>{{descuento}}</span>
+      </div>
+      <div class="info">
+        <label>Subtotal:</label>
+        <span>{{subtotal}}</span>
+      </div>
+      <div class="info">
+        <label>Total:</label>
+        <span>{{total}}</span>
+      </div>
+
+      <p-button (onClick)="llamarPayphone(total)" label="Confirmo que los datos son correctos" styleClass="p-button-success"></p-button>
+      <div  id="pp-button"></div>
+    </div>
+  </div>
+</body>
