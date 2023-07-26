@@ -12,6 +12,7 @@ export class RealizarPagoComponent implements OnInit {
   razon=''
   idrazon=0
   cedula=''
+  fecha=''
   id=''
   nombres=''
   total=0
@@ -30,7 +31,7 @@ generarNumeroAleatorio(): number {
   const stringAleatorio = Array.from({ length: 5 }, () => caracteres.charAt(Math.floor(Math.random() * caracteres.length))).join('');
   console.log('total es igula:'+total)
   window.payphone.Button({
-
+   
     //token obtenido desde la consola de developer
     token: "kO83khezj9D2KYO5iN3bncNttryCWFcgaiG0gkR__jH95BjA1ffi2Kf2SDl_4y64MZC-FiCopPoj9ZzNgVWh9ZaR72s8EsaM4-KpmLGEBwse6zdohMUWcguejSiRqW6EydSHjRiH-SF6pWJVXKbAIc4mD6LKpl2QuEJxEZT0_teaSunLhZg3KPJGMg-3pqDglyGlxHTGL9L3M0AJXdwtblAgS1e1x83ihhHC6DQhAQwHamcUMe5pg3kczLwaXgJ39I62_JstgsJ1A6lIYNpX3XUSt6ALrUSbh0MVs7NDD3LiYtTuhHYLSUNdhVgVlqcaQrbAE5Mdje2ehhMxmjEIO0eiqyE",
 
@@ -40,7 +41,7 @@ generarNumeroAleatorio(): number {
 
     createOrder: function (actions:any) {
       //Se ingresan los datos de la transaccion ej. monto, impuestos, etc
-
+console.log(total,'esto es el total')
       return actions.prepare({
 
         amount:total*100,
@@ -75,10 +76,11 @@ generarNumeroAleatorio(): number {
       this.idrazon=data.idRazon??0
       this.nombres=data.nombre??''
       this.cedula=data.ci??''
+      this.fecha=data.Fecha??''
       this.descuento=data.descuentoBeca??0
       this.subtotal=data.subtotal?? 0
-      this.total= data.total??0
-      
+      this.total= data.total? Number(data.total.toFixed(2)):0
+
      })
 
   }

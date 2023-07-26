@@ -22,6 +22,9 @@ exports.Carga_Academica = connection_1.default.define('carga_academica', {
     fecha: {
         type: sequelize_1.DataTypes.STRING
     },
+    escuela: {
+        type: sequelize_1.DataTypes.STRING
+    },
     periodo: {
         type: sequelize_1.DataTypes.STRING
     },

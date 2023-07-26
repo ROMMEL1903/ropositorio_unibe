@@ -71,6 +71,14 @@ export const updateMatricula = async (req: Request, res: Response) => {
     }
  }
 
+ export const getMatriculasbyEscuela = async (req: Request, res: Response) => {
+    const{escuela}=req.query
+    const matriculas:any= await Matricula.findAll({where:{
+     escuela:escuela
+    }})
+    res.json(matriculas)
+ 
+ }
 
 
  export const deletMatricula= async (req:Request, res:Response)=>{

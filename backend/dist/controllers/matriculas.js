@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deletMatricula = exports.updateMatricula = exports.getMatricula = exports.getMatriculas = exports.newMatricula = void 0;
+exports.deletMatricula = exports.getMatriculasbyEscuela = exports.updateMatricula = exports.getMatricula = exports.getMatriculas = exports.newMatricula = void 0;
 const matricula_1 = require("../models/matricula");
 const newMatricula = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { ciEstudiante, Fecha, nivel, escuela, valorMatricula } = req.body;
@@ -77,6 +77,14 @@ const updateMatricula = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.updateMatricula = updateMatricula;
+const getMatriculasbyEscuela = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { escuela } = req.query;
+    const matriculas = yield matricula_1.Matricula.findAll({ where: {
+            escuela: escuela
+        } });
+    res.json(matriculas);
+});
+exports.getMatriculasbyEscuela = getMatriculasbyEscuela;
 const deletMatricula = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const matricula = yield matricula_1.Matricula.findByPk(id);

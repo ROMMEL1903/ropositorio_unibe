@@ -18,6 +18,10 @@ import { ListMatriculasComponent } from './components/directores/list-matriculas
 import { PagosComponent } from './components/estudiantes/pagos/pagos.component';
 import { HistorialComponent } from './components/estudiantes/historial/historial.component';
 import { RealizarPagoComponent } from './components/estudiantes/realizar-pago/realizar-pago.component';
+import { ListFacturasComponent } from './components/financieros/list-facturas/list-facturas.component';
+import { ModificarFacturaComponent } from './components/financieros/modificar-factura/modificar-factura.component';
+import { ConfirmacionComponent } from './confirmacion/confirmacion.component';
+import { ListaPagosComponent } from './components/financieros/lista-pagos/lista-pagos.component';
 
 
 
@@ -84,6 +88,18 @@ const routes: Routes = [
   },
   {
     path: 'editarCarga/:id', component: CreatCargaComponent, canActivate: [authGuard]
+  },
+  {
+    path: 'listaFacturas', component: ListFacturasComponent, canActivate: [authGuard]
+  },
+  {
+    path:'modificar/:id', component:ModificarFacturaComponent,canActivate:[authGuard]
+  },
+  {
+    path:'getConfirmacio', component:ConfirmacionComponent
+  },
+  {
+    path:'listaPagos', component:ListaPagosComponent,canActivate:[authGuard]
   },
   {
     path: '**', redirectTo: 'login', pathMatch: 'full'

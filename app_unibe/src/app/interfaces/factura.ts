@@ -6,6 +6,8 @@ export interface Factura {
     Fecha?: string,
     Razon?: string,
     idRazon?:number,
+    Beca?:boolean,
+    financiamiento?:boolean,
     descuentoBeca?:number,
     pagado?:boolean,
     subtotal?:number,

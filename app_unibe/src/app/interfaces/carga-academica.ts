@@ -6,7 +6,7 @@ export interface CargaAcademica {
     ciEstudiante: string,
     fecha: string,
     periodo: string,
-
+    escuela:string,
     modalidad: string
 
 

@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
 export class MenuComponent implements OnInit {
   superU=false
   director=false
-  finaciero=false
+  financiero=false
   estudiante=false
-
+itmeFinanciero:MenuItem[]|undefined
   itemsSuperU: MenuItem[] | undefined;
   itemsDirector:MenuItem[]| undefined
   itemsEstudiante:MenuItem[]|undefined
@@ -28,6 +28,9 @@ export class MenuComponent implements OnInit {
 
     if(localStorage.getItem('ROL')==='Estudiante'){
       this.estudiante=true
+    }
+    if(localStorage.getItem('ROL')==='Financiero'){
+      this.financiero=true
     }
 
   }
@@ -73,36 +76,7 @@ export class MenuComponent implements OnInit {
           }
         ]
       },
-      {
-        label: 'Cargas Academicas',
-        icon: 'pi pi-fw pi-bars',
-        items: [
-          {
-            label: 'Edit',
-            icon: 'pi pi-fw pi-pencil',
-            items: [
-              {
-                label: 'Save',
-                icon: 'pi pi-fw pi-calendar-plus'
-              },
-              {
-                label: 'Delete',
-                icon: 'pi pi-fw pi-calendar-minus'
-              }
-            ]
-          },
-          {
-            label: 'Archieve',
-            icon: 'pi pi-fw pi-calendar-times',
-            items: [
-              {
-                label: 'Remove',
-                icon: 'pi pi-fw pi-calendar-minus'
-              }
-            ]
-          }
-        ]
-      }
+    
     ];
 
 
@@ -150,23 +124,33 @@ export class MenuComponent implements OnInit {
 
       },
       {
-        label: 'Pagos',
+        label: 'Pagos pendientes',
         icon: 'pi pi-fw pi-dollar',
-        items: [
-          {
-            label: 'Historial',
-            icon: 'pi pi-fw pi-history',
-            routerLink:'/CrearEstudiante'
-          },
-          {
-            label: 'Pendientes',
-            icon: 'pi pi-fw pi-clock',
-            routerLink:'/listaEstudiante'
-        
-          }
-        ]
-        
+        routerLink:'/pagos'
+      },
+      {
+        label: 'Historial de facturas',
+        icon: 'pi pi-fw pi-history',
+        routerLink:'/misFacturas'
+      },
+    ]
 
+    this.itmeFinanciero=[
+      {
+        label: 'Home',
+        icon: 'pi pi-fw pi-home',
+        routerLink:'/home'
+
+      },
+      {
+        label: 'Facturas',
+        icon: 'pi pi-fw pi-calculator',
+        routerLink:'/listaFacturas'
+      },
+      {
+        label: 'Pagos',
+        icon: 'pi pi-fw pi-money-bill',
+        routerLink:'/listaPagos'
       },
     ]
 

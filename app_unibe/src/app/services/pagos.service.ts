@@ -26,4 +26,8 @@ export class PagosService {
       return this.http.get<Pago>(`${this.myAppUrl}${this.myApi}obtenerPago`, { params });
 
   }
+
+  ontenerPagos():Observable<Pago[]>{
+    return this.http.get<Pago[]>(`${this.myAppUrl}${this.myApi}listaPagos`);
+  }
 }

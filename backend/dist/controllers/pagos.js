@@ -9,23 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getPago = exports.newPago = void 0;
+exports.getPagos = exports.getPago = exports.newPago = void 0;
 const pago_1 = require("../models/pago");
 const newPago = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { idFactura, nombre, cedula, cancelado, total } = req.body;
+    const { transactionId, idFactura, storeName, document, transactionStatus } = req.body;
     const pago = yield pago_1.Pago.findOne({ where: { idFactura: idFactura } });
-    if (pago) {
-        return res.status(400).json({
-            msg: 'Por favor realice el pago de la factura' + idFactura
-        });
-    }
     try {
         yield pago_1.Pago.create({
+            transactionId: transactionId,
             idFactura: idFactura,
-            nombre: nombre,
-            cedula: cedula,
-            cancelado: cancelado,
-            total: total
+            storeName: storeName,
+            document: document,
+            transactionStatus: transactionStatus
         });
         res.json({
             msg: 'Porfavor realice el pago de su facturahfgh' + idFactura
@@ -50,3 +45,8 @@ const getPago = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getPago = getPago;
+const getPagos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const listapagos = yield pago_1.Pago.findAll();
+    res.json(listapagos);
+});
+exports.getPagos = getPagos;

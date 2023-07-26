@@ -7,10 +7,9 @@ exports.Pago = void 0;
 const sequelize_1 = require("sequelize");
 const connection_1 = __importDefault(require("../db/connection"));
 exports.Pago = connection_1.default.define('pago', {
-    id: {
+    transactionId: {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
     },
     idFactura: {
         type: sequelize_1.DataTypes.INTEGER,
@@ -19,17 +18,14 @@ exports.Pago = connection_1.default.define('pago', {
             key: 'id'
         }
     },
-    nombre: {
+    storeName: {
         type: sequelize_1.DataTypes.STRING
     },
-    cedula: {
+    document: {
         type: sequelize_1.DataTypes.STRING
     },
-    cancelado: {
-        type: sequelize_1.DataTypes.BOOLEAN
-    },
-    total: {
-        type: sequelize_1.DataTypes.FLOAT
+    transactionStatus: {
+        type: sequelize_1.DataTypes.STRING
     }
 }, {
     tableName: 'pagos',

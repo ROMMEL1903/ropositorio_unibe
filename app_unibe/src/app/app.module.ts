@@ -52,6 +52,10 @@ import { HomeEComponent } from './components/estudiantes/home-e/home-e.component
 import { HistorialComponent } from './components/estudiantes/historial/historial.component';
 import { RealizarPagoComponent } from './components/estudiantes/realizar-pago/realizar-pago.component';
 import { HomeFComponent } from './components/financieros/home-f/home-f.component';
+import { ListFacturasComponent } from './components/financieros/list-facturas/list-facturas.component';
+import { ModificarFacturaComponent } from './components/financieros/modificar-factura/modificar-factura.component';
+import { ConfirmacionComponent } from './confirmacion/confirmacion.component';
+import { ListaPagosComponent } from './components/financieros/lista-pagos/lista-pagos.component';
 
 
 
@@ -83,6 +87,10 @@ import { HomeFComponent } from './components/financieros/home-f/home-f.component
     HistorialComponent,
     RealizarPagoComponent,
     HomeFComponent,
+    ListFacturasComponent,
+    ModificarFacturaComponent,
+    ConfirmacionComponent,
+    ListaPagosComponent,
  
 
 

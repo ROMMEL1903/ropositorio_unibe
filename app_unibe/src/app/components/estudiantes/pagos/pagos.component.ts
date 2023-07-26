@@ -26,11 +26,13 @@ export class PagosComponent implements OnInit {
     private pServices:PagosService,
     private toastr: ToastrService,
     private routes: ActivatedRoute
-
     ) { }
   ngOnInit() {
     this.facturasPendientes()
-
+    if(this.misFacturas.length<1){
+      this.toastr.success(`No tienes facturas pendientes`,);
+      
+    }
     this.routes.queryParams.subscribe(params => {
       const id = params['id'];
       const clientTransactionId = params['clientTransactionId'];
@@ -63,7 +65,14 @@ export class PagosComponent implements OnInit {
       this.Fservices. miFacturasPendientes(ciEstudiante)
         .subscribe(
           (misFacturas: Factura[]) => {
-            this.misFacturas = misFacturas;
+            if(misFacturas.length<1){
+              this.toastr.success(`No tienes facturas pendientes`,);
+      
+            }else{
+              this.misFacturas = misFacturas;
+            }
+         
+            
           },
           (error: any) => {
             console.error(error);

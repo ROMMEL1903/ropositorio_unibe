@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateCarga = exports.deletCarga = exports.getCarga = exports.newCarga = exports.getCargas = void 0;
+exports.updateCarga = exports.getCargabyEscuela = exports.deletCarga = exports.getCarga = exports.newCarga = exports.getCargas = void 0;
 const carga_academica_1 = require("../models/carga_academica");
 const getCargas = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const listaCargas = yield carga_academica_1.Carga_Academica.findAll();
@@ -17,7 +17,7 @@ const getCargas = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.getCargas = getCargas;
 const newCarga = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id, ciEstudiante, fecha, periodo, modalidad } = req.body;
+    const { id, ciEstudiante, fecha, periodo, escuela, modalidad } = req.body;
     try {
         if (!ciEstudiante || !fecha || !periodo || !modalidad) {
             return res.status(400).json({ msg: 'Por favor, proporcione todos los datos requeridos' });
@@ -26,6 +26,7 @@ const newCarga = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             ciEstudiante: ciEstudiante,
             fecha: fecha,
             periodo: periodo,
+            escuela: escuela,
             modalidad: modalidad
         });
         res.json({
@@ -70,6 +71,14 @@ const deletCarga = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 exports.deletCarga = deletCarga;
+const getCargabyEscuela = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { escuela } = req.query;
+    const carga = yield carga_academica_1.Carga_Academica.findAll({ where: {
+            escuela: escuela
+        } });
+    res.json(carga);
+});
+exports.getCargabyEscuela = getCargabyEscuela;
 const updateCarga = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
     const { id } = req.params;

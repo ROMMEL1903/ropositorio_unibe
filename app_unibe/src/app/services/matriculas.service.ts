@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Matricula } from '../interfaces/matricula';
 import { Observable } from 'rxjs';
@@ -33,6 +33,13 @@ export class MatriculasService {
 
   deletMatricula(id:number): Observable<void> {
     return this.http.delete<void>(this.myAppUrl+this.myApi+id)
+  }
+
+  getMatriculasbyEscuela(escuela: string): Observable<Matricula[]> {
+    const params = new HttpParams()
+      .set('escuela', escuela);
+
+    return this.http.get<Matricula[]>(`${this.myAppUrl}${this.myApi}/`,{ params });
   }
 
 }

@@ -11,5 +11,6 @@ router.post('/crearMatricula', validate_token_1.default, matriculas_1.newMatricu
 router.get('/listaMatriculas', validate_token_1.default, matriculas_1.getMatriculas);
 router.put('/editarMatricula/:id', validate_token_1.default, matriculas_1.updateMatricula);
 router.get('/:id', validate_token_1.default, matriculas_1.getMatricula);
+router.get('/', validate_token_1.default, matriculas_1.getMatriculasbyEscuela);
 router.delete('/:id', validate_token_1.default, matriculas_1.deletMatricula);
 exports.default = router;

@@ -25,7 +25,8 @@ export class ListMatriculasComponent implements OnInit {
 
   obtenerMatriculas(): void {
 
-    this.msevices.getMatriculas()
+    const escuela=localStorage.getItem('ESCUELA')?? ''
+    this.msevices.getMatriculasbyEscuela(escuela)
       .subscribe(
         (matricula: Matricula[]) => {
           this.matricula = matricula;

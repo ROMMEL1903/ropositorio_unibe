@@ -2,21 +2,16 @@ import { Request, Response } from 'express'
 import { Pago } from '../models/pago';
 
 export const newPago= async( req: Request, res:Response)=>{
-    const { idFactura, nombre, cedula, cancelado,total} = req.body;
+    const {transactionId, idFactura, storeName, document, transactionStatus} = req.body;
     const pago = await Pago.findOne({ where: {idFactura: idFactura } })
-    if (pago) {
-        return res.status(400).json({
-            msg: 'Por favor realice el pago de la factura' + idFactura 
-        })
-    }
-
     try {
         await Pago.create({
+            transactionId:transactionId,
             idFactura:idFactura,
-            nombre:nombre,
-            cedula:cedula,
-            cancelado:cancelado,
-            total:total
+            storeName:storeName,
+            document:document,
+            transactionStatus:transactionStatus
+            
         })
         res.json({
             msg: 'Porfavor realice el pago de su facturahfgh'+idFactura
@@ -42,4 +37,11 @@ export const getPago = async (req: Request, res: Response)=>{
             msg:'No existe el pago'
         })
     }
+}
+
+
+export const getPagos = async (req: Request, res: Response) => {
+    const listapagos = await Pago.findAll();
+    res.json(listapagos)
+
 }

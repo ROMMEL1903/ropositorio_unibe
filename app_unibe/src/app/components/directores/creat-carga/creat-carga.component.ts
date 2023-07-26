@@ -33,8 +33,13 @@ export class CreatCargaComponent implements OnInit {
   subtotal = 0
 prueba:any[]=[]
   guardarcargaFactura() {
-    if (this.targetMateria.length > 6 || this.targetMateria.length < 5 &&  this.actualizarCarga==false ) {
-      this.toastr.error('No se puede seleccionar más de 6 materias', 'Error');
+    if (this.targetMateria.length > 6 &&  this.actualizarCarga==false ) {
+      if(this.targetMateria.length >6){
+        this.toastr.error('Numero de materias invalido', 'Error');
+        this.targetMateria = [];
+        this.getMaterias()
+      }
+    
       this.targetMateria = [];
       this.getMaterias()
 
@@ -81,6 +86,7 @@ prueba:any[]=[]
         ciEstudiante: this.ciEstudiante,
         fecha: this.fecha,
         periodo: this.periodo,
+        escuela:localStorage.getItem('ESCUELA')??'',
         modalidad: this.modalidad
       }
       this.cargando = true
@@ -103,7 +109,7 @@ prueba:any[]=[]
     }
   }
   obtenerObjetosMateria() {
-    if (this.targetMateria.length > 6) {
+    if (this.targetMateria.length > 6 && this.targetMateria.length<5) {
       this.toastr.error('No se puede seleccionar más de 6 materias', 'Error');
       this.targetMateria = [];
       this.getMaterias()
@@ -330,6 +336,8 @@ prueba:any[]=[]
         Fecha: new Date().toLocaleDateString(),
         Razon: 'Carga Academica',
         idRazon: idCarga,
+        Beca:false,
+        financiamiento:false,
         pagado: false,
         descuentoBeca: 0,
         subtotal: this.subtotal,
@@ -365,40 +373,10 @@ prueba:any[]=[]
 
 
   }
-  updateCarga() {
-    const carga: CargaAcademica = {
-      fecha: this.fecha,
-      ciEstudiante: this.ciEstudiante,
-      modalidad: this.modalidad,
-      periodo: this.periodo
-    };
-    this.cServices.actualizarC(this.idCarga ?? 0, carga).subscribe(
-      () => {
-     
-        this.toastr.info('Actualice las materias', 'Exito');
-        this.actualizarMaterias()
-      },
-      (error: HttpErrorResponse) => {
-
-        if (error.error.msg) {
-          this.toastr.error(error.error.msg, 'Error');
-        } else {
-          this.toastr.error('Upps ocurrió un error, comuníquese con el administrador', 'Error');
-        }
-      }
-    );
-  }
+  
 
 
-  actualizarCrear() {
-    if (this.idCarga !== null && this.idCarga !== 0) {
-      this.updateCarga()
-      this.actualizarCarga=true
-      this.cargaCreada = true
-    }else{
-      this.siguiente()
-    }
-  }
+
   constructor(private uServices: UserService, private fservices: FacturasService, private mServies: MateriasService, private cdr: ChangeDetectorRef, private toastr: ToastrService, private cServices: CargasService, private router: Router, private aRoute: ActivatedRoute) {
     this.ciEstudiante = String(aRoute.snapshot.paramMap.get('cedula'))
     const idParam = aRoute.snapshot.paramMap.get('id');

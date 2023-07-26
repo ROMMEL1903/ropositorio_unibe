@@ -1,8 +1,7 @@
 export interface Pago {
-    id?: number,
+    transactionId?:number,
     idFactura?:number,
-    nombre?: string,
-    cedula?: string,
-    cancelado?: boolean,
-    total?: number,
+    storeName?:string,
+    document?:string,
+    transactionStatus?:string
 }

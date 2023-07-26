@@ -33,11 +33,17 @@ exports.Factura = connection_1.default.define('factura', {
     idRazon: {
         type: sequelize_1.DataTypes.INTEGER
     },
+    Beca: {
+        type: sequelize_1.DataTypes.BOOLEAN
+    },
+    financiamiento: {
+        type: sequelize_1.DataTypes.BOOLEAN
+    },
     pagado: {
         type: sequelize_1.DataTypes.BOOLEAN
     },
     descuentoBeca: {
-        type: sequelize_1.DataTypes.INTEGER
+        type: sequelize_1.DataTypes.FLOAT
     },
     subtotal: {
         type: sequelize_1.DataTypes.FLOAT

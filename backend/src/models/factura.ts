@@ -30,11 +30,17 @@ export const Factura = sequelize.define('factura', {
     idRazon: {
         type: DataTypes.INTEGER
     },
-    pagado: {
+    Beca: {
         type: DataTypes.BOOLEAN
     },
+    financiamiento: {
+        type: DataTypes.BOOLEAN
+    },
+    pagado: {
+        type: DataTypes.BOOLEAN
+    }, 
     descuentoBeca: {
-        type: DataTypes.INTEGER
+        type: DataTypes.FLOAT
     },
     subtotal: {
         type: DataTypes.FLOAT

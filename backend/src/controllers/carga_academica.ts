@@ -10,7 +10,7 @@ export const getCargas = async (req: Request, res: Response) => {
 }
 
 export const newCarga = async (req: Request, res: Response) => {
-    const { id, ciEstudiante, fecha, periodo, modalidad } = req.body;
+    const { id, ciEstudiante, fecha, periodo,escuela, modalidad } = req.body;
 
     try {
         if (!ciEstudiante || !fecha || !periodo || !modalidad) {
@@ -20,6 +20,7 @@ export const newCarga = async (req: Request, res: Response) => {
             ciEstudiante: ciEstudiante,
             fecha: fecha,
             periodo: periodo,
+            escuela:escuela,
             modalidad: modalidad
 
         });
@@ -56,6 +57,8 @@ export const getCarga = async (req: Request, res: Response) => {
     }
 }
 
+
+
 export const deletCarga= async (req:Request, res:Response)=>{
     const {id}=req.params
     const carga= await Carga_Academica.findByPk(id)
@@ -73,6 +76,16 @@ export const deletCarga= async (req:Request, res:Response)=>{
         
     }
 }
+
+
+export const getCargabyEscuela = async (req: Request, res: Response) => {
+    const{escuela}=req.query
+    const carga:any= await Carga_Academica.findAll({where:{
+     escuela:escuela
+    }})
+    res.json(carga)
+ 
+ }
 
 export const updateCarga = async (req: Request, res: Response) => {
     const { body } = req

@@ -18,8 +18,11 @@ export const Carga_Academica = sequelize.define('carga_academica', {
     fecha:{
         type:DataTypes.STRING
     },
-    periodo:{
+    escuela:{
         type:DataTypes.STRING
+    },
+    periodo:{
+        type:DataTypes.STRING  
     },
    
     modalidad:{

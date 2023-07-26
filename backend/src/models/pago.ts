@@ -2,10 +2,10 @@ import { DataTypes } from "sequelize"
 import sequelize from "../db/connection"
 
 export const Pago = sequelize.define('pago', {
-    id: {
+    transactionId: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+
     },
     idFactura: {
         type: DataTypes.INTEGER,
@@ -14,18 +14,15 @@ export const Pago = sequelize.define('pago', {
             key: 'id'
         } 
     },
-    nombre: {
+    storeName: {
         type: DataTypes.STRING
     },
-    cedula: {
+    document: {
         type: DataTypes.STRING
     },
-    cancelado:{
-         type:DataTypes.BOOLEAN
-    },
-    total: {
-        type: DataTypes.FLOAT
-    } 
+    transactionStatus:{
+        type: DataTypes.STRING
+    }
 }, {
     tableName: 'pagos',
     timestamps: false

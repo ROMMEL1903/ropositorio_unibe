@@ -75,8 +75,8 @@ export class ListCargasComponent implements OnInit {
 
   obtenerCargas(): void {
 
-
-    this.cServices.getCargas()
+    const escuela=localStorage.getItem('ESCUELA')?? ''
+    this.cServices.getCargasbyEscuela(escuela)
       .subscribe(
         (listcargas: CargaAcademica[]) => {
           this.cargas = listcargas;

@@ -15,51 +15,56 @@ export class CargasService {
     this.myApi = '/cargasAcademicas/'
   }
   getCargas(): Observable<CargaAcademica[]> {
-    return this.http.get<CargaAcademica[]>(this.myAppUrl + this.myApi+'lista')
+    return this.http.get<CargaAcademica[]>(this.myAppUrl + this.myApi + 'lista')
   }
 
-  NuevaCarga(carga:CargaAcademica): Observable<any> {
-    return this.http.post(this.myAppUrl + this.myApi+'crearCarga', carga)
-
-  }
-
-
-  getCarga(id:number):Observable<CargaAcademica>{
-    return this.http.get<CargaAcademica>(this.myAppUrl+this.myApi+id)
+  NuevaCarga(carga: CargaAcademica): Observable<any> {
+    return this.http.post(this.myAppUrl + this.myApi + 'crearCarga', carga)
 
   }
 
-  MateriasIntoCargas(materiasintocarga:MateriasCarga){
-    return this.http.post(this.myAppUrl+'/materiasCarga/crear',materiasintocarga)
+
+  getCarga(id: number): Observable<CargaAcademica> {
+    return this.http.get<CargaAcademica>(this.myAppUrl + this.myApi + id)
+
+  }
+
+  MateriasIntoCargas(materiasintocarga: MateriasCarga) {
+    return this.http.post(this.myAppUrl + '/materiasCarga/crear', materiasintocarga)
   }
 
   delet(idCarga: number): Observable<void> {
     const params = new HttpParams().set('idCarga', idCarga.toString());
     const options = { params: params };
-  
-    return this.http.delete<void>(this.myAppUrl +'/materiasCarga/eliminar', options);
+
+    return this.http.delete<void>(this.myAppUrl + '/materiasCarga/eliminar', options);
   }
 
-  getMateriascarga(idCarga:number):Observable<any[]>{
+  getMateriascarga(idCarga: number): Observable<any[]> {
     const params = new HttpParams().set('idCarga', idCarga.toString());
     const options = { params: params };
-    return this.http.get<any>(this.myAppUrl+'/materiasCarga/lista', options);
+    return this.http.get<any>(this.myAppUrl + '/materiasCarga/lista', options);
 
 
   }
 
-  deletCarga(id:number): Observable<void> {
-    return this.http.delete<void>(this.myAppUrl+this.myApi+id)
+  deletCarga(id: number): Observable<void> {
+    return this.http.delete<void>(this.myAppUrl + this.myApi + id)
   }
 
-  
 
- actualizarC(id:number,carga:CargaAcademica): Observable<void>{
 
-    return this.http.put<void>(this.myAppUrl+this.myApi+id, carga)
+  actualizarC(id: number, carga: CargaAcademica): Observable<void> {
 
-    
+    return this.http.put<void>(this.myAppUrl + this.myApi + id, carga)
+
+
 
   }
+  getCargasbyEscuela(escuela: string): Observable<CargaAcademica[]> {
+    const params = new HttpParams()
+      .set('escuela', escuela);
 
+    return this.http.get<CargaAcademica[]>(`${this.myAppUrl}${this.myApi}/`,{ params });
+  }
 }

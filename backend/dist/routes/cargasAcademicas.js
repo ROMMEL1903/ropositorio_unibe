@@ -12,4 +12,5 @@ router.post('/crearCarga', validate_token_1.default, carga_academica_1.newCarga)
 router.get('/:id', validate_token_1.default, carga_academica_1.getCarga);
 router.put('/:id', validate_token_1.default, carga_academica_1.updateCarga);
 router.delete('/:id', validate_token_1.default, carga_academica_1.deletCarga);
+router.get('/', validate_token_1.default, carga_academica_1.getCargabyEscuela);
 exports.default = router;

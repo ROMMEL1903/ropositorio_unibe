@@ -124,6 +124,8 @@ export class CrearMatriculaComponent implements OnInit {
         Fecha: new Date().toLocaleDateString(),
         Razon: 'Matricula',
         idRazon: Idmatricula,
+        Beca:false,
+        financiamiento:false,
         pagado: false,
         descuentoBeca:0,
         subtotal:173.33,
